@@ -1,7 +1,7 @@
 import Header from './Header'
 import Router from '../routes'
 import ReactDOM from 'react-dom'
-import { Provider } from "mobx-react"
+import { Provider } from 'mobx-react'
 import React, { Component } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { ProjectStore } from '../stores'
@@ -19,14 +19,12 @@ class App extends Component {
 			<BrowserRouter>
 				<div>
 					<Header />
-					<Provider {...stores}>
-						<Router />
-						<NotificationSystem />
-					</Provider>
+					<Router />
+					<NotificationSystem />
 				</div>
 			</BrowserRouter>
 		)
 	}
 }
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<Provider {...stores}><App /></Provider>, document.getElementById('app'));
