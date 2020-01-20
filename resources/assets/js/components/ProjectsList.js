@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
 
 export default class ProjectList extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props);
 		this.state = {
 			projects: []
 		}
@@ -19,7 +19,7 @@ export default class ProjectList extends Component {
 		});
 	}
 	render() {
-		const { projects } = this.state
+		const { projects } = this.state;
 		return (
 			<div className='container py-4'>
 				<div className='row justify-content-center'>
