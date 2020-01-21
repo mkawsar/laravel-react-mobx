@@ -14,6 +14,6 @@ Route::post('tasks', 'TaskController@store');
 Route::put('tasks/{task}', 'TaskController@markAsCompleted');
 
 Route::post('login', 'UserController@login');
-Route::middleware('jwt.auth')->group(function () {
+Route::middleware('auth.jwt')->group(function () {
     Route::get('logout', 'UserController@logout');
 });
