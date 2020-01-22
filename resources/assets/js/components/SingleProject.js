@@ -1,11 +1,5 @@
 import axios from 'axios'
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
-import { inject, observer } from 'mobx-react'
-
-@inject('ProjectStore')
-@withRouter
-@observer
 
 export default class SingleProject extends Component {
 	constructor(props) {

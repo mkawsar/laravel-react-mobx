@@ -32,6 +32,7 @@ export default class Login extends Component {
 		if (prevLocation && this.state.isLoggedIn) {
 			return this.props.history.push(prevLocation);
 		}
+		document.title = 'Login';
 	}
 
 	hasErrorFor(field) {
