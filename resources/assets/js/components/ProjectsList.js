@@ -6,17 +6,29 @@ export default class ProjectList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			projects: []
+			projects: [],
+			title: 'Project List'
 		}
+	}
+
+	componentWillMount() {
+		document.title = this.state.title;
 	}
 
 
 	componentDidMount() {
-		axios.get('/api/projects').then(response => {
-			this.setState({
-				projects: response.data
+		let state = localStorage["appState"];
+		let AppState = JSON.parse(state);
+		axios.get('/api/projects', {
+			headers: {
+				'Authorization': `Bearer ${AppState.user.access_token}`
+			}
+		})
+			.then(response => {
+				this.setState({
+					projects: response.data
+				});
 			});
-		});
 	}
 	render() {
 		const { projects } = this.state;

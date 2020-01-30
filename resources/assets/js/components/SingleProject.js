@@ -25,6 +25,7 @@ export default class SingleProject extends Component {
 					project: res.data,
 					tasks: res.data.tasks
 				})
+				document.title = `Project | ${res.data.name}`;
 			})
 			.catch(err => {
 				console.log(err);
@@ -86,7 +87,7 @@ export default class SingleProject extends Component {
 
 
 	render() {
-		const { project, tasks } = this.state
+		const { project, tasks } = this.state;
 		return (
 			<div className='container py-4'>
 				<div className='row justify-content-center'>

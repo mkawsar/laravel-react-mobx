@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
-Route::get('projects', 'ProjectController@index');
 Route::post('projects', 'ProjectController@store');
 Route::get('projects/{id}', 'ProjectController@show');
 Route::put('projects/{project}', 'ProjectController@markAsCompleted');
@@ -16,4 +15,10 @@ Route::put('tasks/{task}', 'TaskController@markAsCompleted');
 Route::post('login', 'UserController@login');
 Route::middleware('auth.jwt')->group(function () {
     Route::get('logout', 'UserController@logout');
+});
+
+Route::group(['middleware' => ['jwt.verify']], function () {
+    Route::get('user', 'UserController@getAuthenticatedUser');
+    Route::get('closed', 'UserController@closed');
+    Route::get('projects', 'ProjectController@index');
 });

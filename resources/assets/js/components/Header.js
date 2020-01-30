@@ -19,6 +19,28 @@ export default class Header extends Component {
 		if (state) {
 			let AppState = JSON.parse(state);
 			this.setState({ isLoggedIn: AppState.isLoggedIn, user: AppState });
+			axios.get('api/closed', {
+				headers: {
+					'Authorization': `Bearer ${AppState.user.access_token}`
+				}
+			})
+				.then(res => {
+					if (res.data.status == 'Token is Expired') {
+						let appState = {
+							isLoggedIn: false,
+							user: {}
+						};
+						localStorage["appState"] = JSON.stringify(appState);
+						this.setState({
+							isLoggedIn: appState.isLoggedIn,
+							user: appState.user,
+						});
+						location.reload()
+					}
+				})
+				.catch(err => {
+					console.log(err)
+				})
 		}
 	}
 
@@ -81,7 +103,7 @@ export default class Header extends Component {
 		return (
 			<nav className='navbar navbar-expand-md navbar-light navbar-laravel'>
 				<div className='container'>
-					<Link className='navbar-brand' to='/'>Tasksman</Link>
+					<Link className='navbar-brand' to='/'>Laravel ReactJS</Link>
 					{isLoggedIn == false ? null : <a href="#" className='navbar-brand' onClick={this.handleOnClickLogut}>Logout</a>}
 				</div>
 			</nav>
